@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane fx:id="root" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.supsi.musicplayer.controller.PlayerController">
+    <top>
+        <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
+            <menus>
+                <Menu text="%menu.file">
+                    <items>
+                        <MenuItem onAction="#openAudioFile" text="%menu.file.open" />
+                        <MenuItem onAction="#exitApplication" text="%menu.file.exit" />
+                    </items>
+                </Menu>
+                <Menu text="%menu.playlists">
+                    <items>
+                        <MenuItem onAction="#openPlaylistManager" text="%menu.playlists" />
+                    </items>
+                </Menu>
+                <Menu text="%menu.preferences">
+                    <MenuItem onAction="#showPreferencesWindow" text="%menu.preferences.language" />
+                </Menu>
+                <Menu text="?">
+                    <items>
+                        <MenuItem onAction="#showAboutDialog" text="%menu.about" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
+    <center>
+        <HBox spacing="10" HBox.hgrow="ALWAYS">
+            <padding>
+                <Insets bottom="10" left="10" right="10" top="10" />
+            </padding>
+            <!-- Main Player Section -->
+            <VBox maxWidth="Infinity" spacing="10" HBox.hgrow="ALWAYS">
+                <!-- Track Info -->
+                <VBox alignment="CENTER" spacing="10" VBox.vgrow="ALWAYS">
+                    <padding>
+                        <Insets bottom="10" left="20" right="20" top="20" />
+                    </padding>
+                    <HBox alignment="CENTER" spacing="20" HBox.hgrow="ALWAYS">
+                        <VBox alignment="CENTER" prefHeight="61.0" prefWidth="290.0" spacing="5" HBox.hgrow="ALWAYS">
+                            <Label fx:id="titleLabel" alignment="CENTER" prefHeight="17.0" prefWidth="290.0" styleClass="track-title" text="%track.placeholder" wrapText="true" />
+                            <Label fx:id="artistLabel" alignment="CENTER" styleClass="track-artist" text="" wrapText="true" />
+                            <Label fx:id="albumLabel" alignment="CENTER" styleClass="track-album" text="" wrapText="true" />
+                        </VBox>
+                    </HBox>
+
+                    <!-- Album Placeholder Image -->
+                    <ImageView fx:id="albumArt" fitHeight="200" fitWidth="200" preserveRatio="true" styleClass="album-image">
+                        <image>
+                            <Image url="@/images/album_placeholder.jpg" />
+                        </image>
+                        <VBox.margin>
+                            <Insets bottom="20" top="20" />
+                        </VBox.margin>
+                    </ImageView>
+                </VBox>
+
+                <!-- Progress -->
+                <VBox spacing="5" VBox.vgrow="NEVER">
+                    <padding>
+                        <Insets bottom="10" left="20" right="20" top="10" />
+                    </padding>
+                    <Slider fx:id="progressSlider" max="100" min="0" onMousePressed="#onProgressSliderPressed" onMouseReleased="#onProgressSliderReleased" value="0" HBox.hgrow="ALWAYS" />
+                    <HBox alignment="CENTER">
+                        <Label fx:id="currentTimeLabel" text="00:00" />
+                        <Label text=" / " />
+                        <Label fx:id="totalTimeLabel" text="00:00" />
+                    </HBox>
+                </VBox>
+
+                <!-- Volume Control -->
+                <VBox alignment="CENTER" spacing="5" VBox.vgrow="NEVER">
+                    <padding>
+                        <Insets bottom="10" left="20" right="20" top="0" />
+                    </padding>
+                    <Label styleClass="volume-label" text="%player.volume" />
+                    <HBox alignment="CENTER" spacing="10">
+                        <Button fx:id="muteButton" onAction="#onMuteClicked" styleClass="volume-button" text="🔊" />
+                        <Button fx:id="volumeDownButton" onAction="#onVolumeDownClicked" styleClass="volume-button" text="−" />
+                        <Slider fx:id="volumeSlider" max="100" min="0" prefWidth="200" value="50" />
+                        <Button fx:id="volumeUpButton" onAction="#onVolumeUpClicked" styleClass="volume-button" text="+" />
+                        <Label fx:id="volumeLabel" styleClass="volume-value" text="50%" />
+                    </HBox>
+                </VBox>
+              <VBox alignment="CENTER" spacing="10" VBox.vgrow="NEVER">
+                  <padding>
+                      <Insets bottom="20" />
+                  </padding>
+      
+                  <!-- Controls -->
+                  <HBox alignment="CENTER" spacing="15">
+                      <padding>
+                          <Insets bottom="10" left="10" right="10" top="10" />
+                      </padding>
+                      <Button fx:id="shuffleButton" onAction="#onShuffleClicked" styleClass="control-button" text="🔀" />
+                      <Button fx:id="previousButton" onAction="#onPreviousClicked" styleClass="control-button" text="⏮" />
+                      <Button fx:id="playButton" onAction="#onPlayPauseClicked" styleClass="control-button" text="▶" />
+                      <Button fx:id="stopButton" onAction="#onStopClicked" styleClass="control-button" text="⏹" />
+                      <Button fx:id="nextButton" onAction="#onNextClicked" styleClass="control-button" text="⏭" />
+                  </HBox>
+              </VBox>
+            </VBox>
+
+            <!-- Playlist Queue Section -->
+            <VBox maxWidth="300" minWidth="250" prefWidth="250" spacing="5" HBox.hgrow="NEVER">
+                <TitledPane expanded="true" text="%sidebar.title" VBox.vgrow="ALWAYS">
+                    <VBox spacing="5" VBox.vgrow="ALWAYS">
+                        <padding>
+                            <Insets bottom="5" left="5" right="5" top="5" />
+                        </padding>
+                        <Label fx:id="currentPlaylistLabel" style="-fx-font-weight: bold; -fx-font-size: 14px;" styleClass="playlist-name" text="%sidebar.placeholder" wrapText="true" />
+                        <Label fx:id="playlistTrackCountLabel" style="-fx-font-style: italic; -fx-text-fill: #666;" styleClass="track-count" text="(0)" />
+                        <ListView fx:id="playlistQueueListView" onMouseClicked="#onQueueItemClicked" VBox.vgrow="ALWAYS" />
+                        <Label style="-fx-font-size: 11px; -fx-text-fill: #666; -fx-font-style: italic;" text="%sidebar.playsong" wrapText="true" />
+                    </VBox>
+                </TitledPane>
+            </VBox>
+        </HBox>
+    </center>
+</BorderPane>

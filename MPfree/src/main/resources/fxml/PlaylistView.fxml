@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane fx:id="root" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="ch.supsi.musicplayer.controller.PlaylistController"
+            stylesheets="@../styles/windows.css">
+    <center>
+        <SplitPane dividerPositions="0.3" prefHeight="400.0" prefWidth="600.0">
+            <!-- Left panel: Playlists list -->
+            <VBox spacing="10">
+                <padding>
+                    <Insets top="10" right="10" bottom="10" left="10" />
+                </padding>
+                
+                <Label text="%playlist.title" styleClass="section-header" />
+                
+                <ListView fx:id="playlistsListView" VBox.vgrow="ALWAYS" />
+                
+                <HBox spacing="10">
+                    <TextField fx:id="newPlaylistNameField" promptText="%playlist.nameplaceholder" HBox.hgrow="ALWAYS" />
+                    <Button text="%playlist.create" onAction="#onCreatePlaylistClicked" styleClass="primary" />
+                </HBox>
+                
+                <Button fx:id="importFolderButton" text="%playlist.import" onAction="#onImportFolderClicked" maxWidth="Infinity" />
+                <Button text="%playlist.delete" onAction="#onDeletePlaylistClicked" maxWidth="Infinity" />
+            </VBox>
+            
+            <!-- Right panel: Playlist content -->
+            <VBox spacing="10">
+                <padding>
+                    <Insets top="10" right="10" bottom="10" left="10" />
+                </padding>
+                
+                <HBox alignment="CENTER_LEFT" spacing="10">
+                    <Label fx:id="currentPlaylistLabel" text="%playlist.placeholder" styleClass="section-header" />
+                    <Label fx:id="trackCountLabel" styleClass="label" />
+                </HBox>
+                
+                <Separator />
+                
+                <HBox alignment="CENTER_RIGHT" spacing="5">
+                    <Label text="%playlist.move" styleClass="label" />
+                </HBox>
+                
+                <HBox spacing="10">
+                    <ListView fx:id="playlistSongsListView" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" />
+                    
+                    <VBox alignment="CENTER" spacing="10">
+                        <Button text="⬆" onAction="#onMoveSongUpClicked" fx:id="moveSongUpButton" />
+                        <Button text="⬇" onAction="#onMoveSongDownClicked" fx:id="moveSongDownButton" />
+                    </VBox>
+                </HBox>
+                
+                <HBox spacing="10">
+                    <Button text="%playlist.add" onAction="#onAddSongClicked" />
+                    <Button text="%playlist.remove" onAction="#onRemoveSongClicked" />
+                    <Button text="%playlist.play" onAction="#onPlayPlaylistClicked" styleClass="primary" HBox.hgrow="ALWAYS" maxWidth="Infinity" />
+                </HBox>
+            </VBox>
+        </SplitPane>
+    </center>
+</BorderPane> 

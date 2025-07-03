@@ -1,0 +1,127 @@
+.root {
+    -fx-font-family: 'Segoe UI', Roboto, sans-serif;
+    -fx-background-color: linear-gradient(to bottom, #F5F9FF, #E3F2FD);
+}
+
+.section-header {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1565C0;
+}
+
+.button {
+    -fx-background-color: white;
+    -fx-text-fill: #2196F3;
+    -fx-font-size: 14px;
+    -fx-padding: 8 16;
+    -fx-background-radius: 4;
+    -fx-border-color: #BBDEFB;
+    -fx-border-width: 1px;
+    -fx-border-radius: 4;
+    -fx-min-width: 70px;
+}
+
+.button:hover {
+    -fx-background-color: #E3F2FD;
+    -fx-text-fill: #FF9800;
+}
+
+.button.primary {
+    -fx-background-color: #FF9800;
+    -fx-text-fill: white;
+    -fx-border-width: 0;
+    -fx-min-width: 85px;
+}
+
+.button.primary:hover {
+    -fx-background-color: #FB8C00;
+}
+
+.text-field {
+    -fx-background-color: white;
+    -fx-border-color: #BBDEFB;
+    -fx-border-width: 1;
+    -fx-border-radius: 4;
+    -fx-padding: 8;
+}
+
+.text-field:focused {
+    -fx-border-color: #2196F3;
+}
+
+.list-view {
+    -fx-background-color: white;
+    -fx-border-color: #E3F2FD;
+    -fx-border-width: 1;
+    -fx-border-radius: 4;
+}
+
+.list-cell {
+    -fx-padding: 8 12;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent transparent #F5F9FF transparent;
+    -fx-border-width: 0 0 1 0;
+}
+
+.list-cell:filled:hover {
+    -fx-background-color: #E3F2FD;
+}
+
+.list-cell:filled:selected {
+    -fx-background-color: #BBDEFB;
+    -fx-text-fill: #1565C0;
+}
+
+.label {
+    -fx-text-fill: #1565C0;
+}
+
+.combo-box {
+    -fx-background-color: white;
+    -fx-border-color: #BBDEFB;
+    -fx-border-width: 1;
+    -fx-border-radius: 4;
+}
+
+.combo-box .list-cell {
+    -fx-padding: 8;
+}
+
+.combo-box .arrow-button {
+    -fx-background-color: transparent;
+}
+
+.combo-box .arrow {
+    -fx-background-color: #2196F3;
+}
+
+.split-pane {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+.split-pane-divider {
+    -fx-background-color: #BBDEFB;
+    -fx-padding: 0 1 0 1;
+}
+
+.separator {
+    -fx-background-color: #BBDEFB;
+}
+
+.dialog-pane {
+    -fx-background-color: white;
+}
+
+.dialog-pane .header-panel {
+    -fx-background-color: #90CAF9;
+}
+
+.dialog-pane .button-bar .button {
+    -fx-background-color: #2196F3;
+    -fx-text-fill: white;
+}
+
+.dialog-pane .button-bar .button:hover {
+    -fx-background-color: #1976D2;
+} 
